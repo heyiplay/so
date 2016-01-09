@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<project name="MediaPlayerSharedObject" basedir="." default="">
+	<property environment="env" />
+    <property name="project.root" value="${basedir}" />
+    <property file="build.properties" />
+	
+    <taskdef resource="flexTasks.tasks" classpath="${FLEX_TASKS}" />
+	
+	<!--编译模块-->
+	<target name="so" description="编译并压缩此so模块">
+		<echo message="================================================="/>
+		<echo message="Compile Media Player Shared Object"/>
+		<echo message="================================================="/>
+		
+		<mxmlc
+		
+			file="${SOURCE_DIR}/com/tudou/player/module/MediaPlayerSharedObject.as"
+			
+            output="${DEPLOY_DIR}/so.swf"
+			
+			optimize="true"
+			
+			default-background-color="0x000000"
+			
+            debug="false"
+			
+			static-link-runtime-shared-libraries="true"
+			
+			static-rsls="false"
+			
+		>
+			
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+			
+			<default-size width="215" height="138"/>
+			
+            <!--设置源代码位置-->
+            <source-path path-element="${SOURCE_DIR}"/>
+            <source-path path-element="${basedir}/../custom/src"/>
+			
+			<!--设置嵌入类-->
+			<includes symbol="com.tudou.player.config.AccessDomain"/>
+			
+			<!--设置依赖库-->
+			<compiler.library-path dir="${basedir}/../rsl/bin" append="true">
+				<include name="rsl.swc"/>
+			</compiler.library-path>
+			
+        </mxmlc>
+		
+		<!--压缩模块-->
+		<exec executable="${basedir}/../tools/lzma/swflzmacompress.exe" failonerror="true">
+		  <arg line="${DEPLOY_DIR}/so.swf"/>
+		  <arg line="--update-version"/>
+		</exec>
+	</target>
+</project>
