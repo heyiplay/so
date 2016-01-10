@@ -1,7 +1,7 @@
 # 模块简介
 #### 合一媒体播放器SO模块，主要用于各端存取播放相关的本地数据信息，而不用依赖播放器的存在。存取值可以是任何 ActionScript 或 JavaScript 类型的对象（数组、数字、布尔值、字节数组、XML，等等）flash、js、c++ 各端均可单独载入使用此模块调用存取播放共享对象；
 
-Author: 8088 [flasher.jun@gmail.com]
+Author: 8088 [flasher.jun@gmail.com]  
 License: [MIT](http://opensource.org/licenses/MIT) 
 
 ## SharedObject的本地保存路径
